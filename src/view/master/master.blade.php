@@ -184,15 +184,15 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item  ">
-                            <a href="#"
+                            <a href="{{route('adminPanel')}}"
                                class="nav-link {{ request()->is('admin') ? 'active':''   }} ">
                                 <i class="nav-icon fa fa-dashboard "></i>
                                 <p>داشبورد </p>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="#"
-                               class="nav-link {{ request()->is('admin/users') ? 'active':''   }} ">
+                            <a href="{{route('user.index')}}"
+                               class="nav-link {{ request()->is('admin/user') ? 'active':''   }} ">
                                 <i class="fa fa-user nav-icon"></i>
                                 <p>کاربران</p>
                             </a>
