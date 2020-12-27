@@ -1,0 +1,16 @@
+{
+    "name": "javad/adminlte",
+    "description": "ygo 4tg gou gy yogo ugy ouy",
+    "authors": [
+        {
+            "name": "mrgod",
+            "email": "miniopera165@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "admin\\LTE\\": "src/"
+        }
+    },
+    "require": {}
+}
