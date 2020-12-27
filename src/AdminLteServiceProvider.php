@@ -15,6 +15,7 @@ class AdminLteServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__."/resource/" => public_path('/')
         ]);
+        $this->loadViewsFrom(__DIR__."/view",'adminLTE');
     }
     public function register()
     {
