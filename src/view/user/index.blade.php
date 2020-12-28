@@ -90,13 +90,11 @@
                         <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>نام و نام خانوادگی</th>
-                            <th>شماره دانشجویی</th>
-                            <th>تلفن تماس</th>
-                            <th>همه امتیاز کسب شده</th>
-                            <th>امتیاز کسب این دوره</th>
-                            <th>فعالیت های ثبت شده</th>
-                            <th>دسترسی</th>
+                            <th>نام کاربر</th>
+                            <th>ایمیل</th>
+                            <th>موبایل</th>
+                            <th>وضعیت موبایل</th>
+                            <th>تاریخ عضویت</th>
                             <th style="width: 40px">عملیات</th>
                         </tr>
                         </thead>
@@ -104,39 +102,36 @@
                         @foreach($users as $l =>$val)
                             <tr>
                                 <td>{{$l+1}}.</td>
-                                <td>{{$val->name}}</td>
                                 <td>
-                                    {{$val->meta()->first()->student_number}}
+                                    @if($val->super_admin)
+                                        <span class="badge badge-primary">
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                    @endif
+                                    {{$val->name}}</td>
+                                <td>
+                                    {{$val->email}}
                                 </td>
                                 <td>
-                                    {{$val->meta()->first()->mobile}}
+                                    {{$val->mobile}}
                                 </td>
                                 <td>
-                                    {{$val->Action()->where('status',1)->sum('points')}}
+                                    @if ($val->phone_verify)
+                                        <span class="badge badge-success"> تایید شده</span>
+                                    @else
+                                        <span class="badge badge-danger">عدم تایید </span>
+                                    @endif
                                 </td>
                                 <td>
-                                    {{$val->Action()->where([['status',1],['plan_id',\Illuminate\Support\Facades\Cache::get('current')]])->sum('points')}}
+                                    {{$val->created_at}}
                                 </td>
                                 <td>
-                                    <span class="badge badge-success">{{$val->Action()->where('status',1)->count()}}</span>
+                                    @if (!$val->super_admin)
+                                        <a href="{{route('user.edit',$val->id)}}" class="btn btn-sm btn-warning">
+                                            <i  class="fa fa-edit"></i>
+                                        </a>
+                                    @endif
 
-                                </td>
-                                <td>
-                                    {{\App\permission::where('user_id',$val->id)->count()>0 ? 'مدیریت':'دانشجو'}}
-                                </td>
-                                <td>
-                                    <a href="{{route('ActionPanel.index')}}?user={{$val->id}}"
-                                       style="color:#7330d2 ;text-decoration: none">
-                                        <i class="fa fa-filter"></i>
-                                    </a>
-                                    <a href="{{route('User.show',$val->id)}}"
-                                       style="color:cornflowerblue;text-decoration: none">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                    <a href="{{route('User.edit',$val->id)}}"
-                                       style="color:orange;text-decoration: none">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
                                 </td>
                             </tr>
                         @endforeach

@@ -1,7 +1,9 @@
 <?php
 
 namespace admin\lte\http\controller;
+use admin\LTE\Requests\UserUpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("adminLTE::user.index");
+        $users = User::all();
+        return view("adminLTE::user.index",compact('users'));
     }
 
     /**
@@ -23,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -56,7 +59,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('adminLTE::user.edit',compact('user'));
     }
 
     /**
@@ -66,9 +70,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        if ($user->super_admin)
+            abort(403);
+
+        if (isset($request->password)) {
+            $password = bcrypt($request->password);
+            $user->update([
+                'password'=>$password
+            ]);
+        }
+        $user->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'mobile'=>$request->mobile,
+            'phone_verify'=>$request->phone_verify,
+        ]);
+        return back();
+
+
     }
 
     /**
