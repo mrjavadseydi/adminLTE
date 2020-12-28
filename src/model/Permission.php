@@ -1,6 +1,7 @@
 <?php
 
-namespace App;
+namespace admin\LTE\model;
+
 
 use Illuminate\Database\Eloquent\Model;
 

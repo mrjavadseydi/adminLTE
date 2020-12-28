@@ -3,7 +3,6 @@
 
 namespace admin\LTE\model;
 
-
 use App\Models\User;
 
 class JavadUser extends User
