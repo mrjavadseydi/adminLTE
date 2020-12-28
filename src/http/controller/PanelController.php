@@ -10,6 +10,7 @@ class PanelController extends Controller
 {
     public function index()
     {
+        \Gate::authorize('user-manage');
         return view('adminLTE::index');
     }
 }

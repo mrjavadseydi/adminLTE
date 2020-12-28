@@ -197,7 +197,13 @@
                                 <p>کاربران</p>
                             </a>
                         </li>
-
+                        <li class="nav-item ">
+                            <a href="{{route('Role.index')}}"
+                               class="nav-link {{ request()->is('admin/Role') ? 'active':''   }} ">
+                                <i class="fa fa-universal-access nav-icon"></i>
+                                <p>سیستم اجازه دسترسی</p>
+                            </a>
+                        </li>
                     </ul>
 
                 </nav>

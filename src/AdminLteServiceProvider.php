@@ -5,6 +5,7 @@ namespace admin\LTE;
 
 
 use admin\LTE\model\Permission;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AdminLteServiceProvider extends ServiceProvider
@@ -15,7 +16,8 @@ class AdminLteServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/route/web.php');
         $this->publishes([
             __DIR__."/resource/" => public_path('/'),
-            __DIR__."/model/" => app_path('/Models/AdminLTE')
+            __DIR__."/view" => resource_path('/views/adminLTE')
+//            __DIR__."/model/" => app_path('/Models/AdminLTE')
         ]);
         $this->loadViewsFrom(__DIR__."/view",'adminLTE');
         $this->loadMigrationsFrom(__DIR__."/migration");
