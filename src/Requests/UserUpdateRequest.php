@@ -28,7 +28,7 @@ class UserUpdateRequest extends FormRequest
             'email' => 'required',
             'mobile' => 'required|max:12',
             'phone_verify' => "in:0,1",
-            'repassword'=>'required_with:password|same:password'
+            'repassword'=>'same:password'
         ];
     }
 }

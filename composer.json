@@ -11,6 +11,5 @@
         "psr-4": {
             "admin\\LTE\\": "src/"
         }
-    },
-    "require": {}
+    }
 }

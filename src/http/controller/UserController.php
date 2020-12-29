@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class UserController extends Controller
 {
     /**
@@ -13,10 +14,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = new User();
+        $users = $this->filterUser($request,$users)->get();
         return view("adminLTE::user.index",compact('users'));
+    }
+
+    public function filterUser(Request $request ,$users){
+        if ($request->has('email')&&!empty($request->email)) {
+            $users = $users->where('email' ,'like' ,"%".$request->email."%");
+        }
+        if ($request->has('name')&&!empty($request->name)) {
+            $users = $users->where('name' ,'like' ,"%".$request->name."%");
+        }
+        if ($request->has('mobile')&&!empty($request->mobile)) {
+            $users = $users->where('mobile' ,'like' ,"%".$request->mobile."%");
+        }
+        return $users;
     }
 
     /**
@@ -88,7 +103,7 @@ class UserController extends Controller
             'mobile'=>$request->mobile,
             'phone_verify'=>$request->phone_verify,
         ]);
-        return back();
+        return back()->with('success',"ویرایش اطلاعات کاربر با موفقیت انجام شد");
 
 
     }
@@ -101,6 +116,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::whereId($id)->first();
+        if ($user->super_admin||$user->id == \Auth::id())
+            abort(403);
+
+        $user->delete();
+
+
+
     }
 }

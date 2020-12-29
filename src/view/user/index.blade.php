@@ -39,14 +39,14 @@
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label>شماره دانشجویی:</label>
-                                    <input type="text" class="form-control" placeholder="شماره دانشجویی" name="stunumber">
+                                    <label>ایمیل:</label>
+                                    <input type="text" class="form-control" placeholder="ایمیل" name="email">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label>کد ملی:</label>
-                                    <input type="text" class="form-control" placeholder="کدملی" name="natnumber">
+                                    <label>تلفن همراه:</label>
+                                    <input type="text" class="form-control" placeholder="تلفن همراه" name="mobile">
                                 </div>
                             </div>
                         </div>
@@ -60,16 +60,6 @@
                         <div class="col-md-4">
 
                         </div>
-                        {{--                        <div class="col-md-4">--}}
-                        {{--                            <button id="copy" class="btn btn-outline-primary " onclick="s1()">--}}
-                        {{--                                <i class="fa fa-copy"></i>--}}
-                        {{--                                کپی محتوا--}}
-                        {{--                            </button>--}}
-                        {{--                            <button id="ExportReporttoExcel" class="btn btn-outline-success " onclick="s2()">--}}
-                        {{--                                <i class="fa fa-file-excel-o"></i>--}}
-                        {{--                                دریافت خروجی اکسل--}}
-                        {{--                            </button>--}}
-                        {{--                        </div>--}}
                     </div>
                     <!-- /.row -->
                 </div>
@@ -95,7 +85,7 @@
                             <th>موبایل</th>
                             <th>وضعیت موبایل</th>
                             <th>تاریخ عضویت</th>
-                            <th style="width: 40px">عملیات</th>
+                            <th >عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -130,6 +120,9 @@
                                         <a href="{{route('user.edit',$val->id)}}" class="btn btn-sm btn-warning">
                                             <i  class="fa fa-edit"></i>
                                         </a>
+                                        <a href="" class="btn btn-sm btn-danger trashbtn" data-id="{{$val->id}}">
+                                            <i class="fa fa-trash" ></i>
+                                        </a>
                                     @endif
 
                                 </td>
@@ -147,7 +140,7 @@
 @endsection
 @section('script')
 
-    <script type="text/javascript" src="{{asset('plugin/datatables.js')}}"></script>
+    <script type="text/javascript" src="{{asset('AdminAsset/plugin/datatables.js')}}"></script>
     <script>
 
         $(document).ready(function () {
@@ -161,6 +154,45 @@
             });
         });
 
+    </script>
+    <script src="{{asset('AdminAsset/plugin/sweetalert.js')}}"></script>
+    <script>
+        $(document).on('click', '.trashbtn', function (e) {
+            let _token = $('div[name="destroy"]').attr('content');
+            e.preventDefault();
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'آیا  اطمینان دارید ؟',
+                text: "آیا از حذف این رکورد اطمینان دارید ؟ این دیتا قابل بازیابی نخواهد بود !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "خیر منصرف شدم!",
+                confirmButtonText: 'بله !'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{url('admin/user')}}/"+id,
+                        data: {id: id, _token: _token,_method:'DELETE'},
+                        success: function (data) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'حذف رکورد از دیتابیس با موفقیت انجام شد !',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1800);
+
+                        }
+                    });
+                }
+            })
+        });
     </script>
 
 @endsection

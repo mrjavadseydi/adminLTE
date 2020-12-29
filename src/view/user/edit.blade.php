@@ -24,7 +24,17 @@
                 </div>
 
                 <div class="card-body pad">
-                    @if ($user->super_admin)
+                    @if ($errors->any())
+                        <div class="alert alert-danger ">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                @if ($user->super_admin)
                         <div class="alert alert-danger">
                             ویرایش سوپر ادمین مجاز نیست . برای ویرایش اطلاعات سوپر ادمین از دیتابیس اقدام نمایید
                         </div>
