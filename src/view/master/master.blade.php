@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>پنل مدیریت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -33,9 +34,9 @@
     <link rel="stylesheet" href="{{asset('AdminAsset/')}}/dist/css/custom-style.css">
 
     <!----data table----->
-    <link rel="stylesheet" type="text/css" href="{{asset('plugin/datatables.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('AdminAsset/plugin/datatables.css')}}"/>
     <style>
-        #akbari{
+        #akbari {
             position: fixed;
             background: white;
             top: 0;
@@ -44,6 +45,7 @@
             bottom: 0;
             z-index: 9999999;
         }
+
         #preloader {
             z-index: 100000;
             position: relative !important;
@@ -169,9 +171,9 @@
                     <div class="info">
                         <a href="#" class="d-block">
                             @if(auth()->check())
-                            {{auth()->user()->name}}
+                                {{auth()->user()->name}}
                             @else
-                            {{("مهمان")}}
+                                {{("مهمان")}}
                             @endif
                         </a>
                     </div>
@@ -292,5 +294,61 @@
     });
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,
+        "closeClass": "toast-close-button",
+        "closeDuration": 300,
+        "closeEasing": "swing",
+        "closeHtml": "<button><i class=\"icon-off\"><\/i><\/button>",
+        "closeMethod": "fadeOut",
+        "closeOnHover": true,
+        "containerId": "toast-container",
+        "debug": false,
+        "escapeHtml": false,
+        "extendedTimeOut": 10000,
+        "hideDuration": 1000,
+        "hideEasing": "linear",
+        "hideMethod": "fadeOut",
+        "iconClass": "toast-info",
+        "iconClasses": {
+            "error": "toast-error",
+            "info": "toast-info",
+            "success": "toast-success",
+            "warning": "toast-warning"
+        },
+        "messageClass": "toast-message",
+        "newestOnTop": false,
+        "onHidden": null,
+        "onShown": null,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": true,
+        "progressBar": true,
+        "progressClass": "toast-progress",
+        "rtl": true,
+        "showDuration": 300,
+        "showEasing": "swing",
+        "showMethod": "fadeIn",
+        "tapToDismiss": true,
+        "target": "body",
+        "timeOut": 5000,
+        "titleClass": "toast-title",
+        "toastClass": "toast"
+    };
+    @if ($message = Session::get('success'))
+    toastr.success('{{$message}}', '', []);
+    @elseif($message = Session::get('danger'))
+    toastr.error('{{$message}}', '', []);
+    @elseif ($message = Session::get('warning'))
+    toastr.warning('{{$message}}', '', []);
+    @elseif ($message = Session::get('info'))
+    toastr.info('{{$message}}', '', []);
+    @endif
+
+
+</script>
+
+
 </body>
 </html>
