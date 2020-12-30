@@ -107,6 +107,15 @@
             }
         }
     </style>
+    <style>
+        .dt-buttons{
+            float: left;
+            padding: 10px;
+        }
+        .dt-buttons button{
+            margin: 3px;
+        }
+    </style>
     <script src="{{asset('AdminAsset/')}}/plugins/jquery/jquery.min.js"></script>
 
 </head>
@@ -200,10 +209,10 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="{{route('Role.index')}}"
-                               class="nav-link {{ request()->is('admin/Role') ? 'active':''   }} ">
+                            <a href="{{route('permissions.index')}}"
+                               class="nav-link {{ request()->is('admin/permissions') ? 'active':''   }} ">
                                 <i class="fa fa-universal-access nav-icon"></i>
-                                <p>سیستم اجازه دسترسی</p>
+                                <p>دسترسی ها</p>
                             </a>
                         </li>
                     </ul>

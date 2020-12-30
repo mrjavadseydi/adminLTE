@@ -1,12 +1,12 @@
 <?php
 
 namespace admin\LTE\http\controller;
-
-use admin\LTE\model\Role;
+use admin\LTE\model\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,14 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::query();
+        $permissions = Permission::query();
 
-        if ($keyword = request('search')) {
-            $roles->where('name', 'LIKE', "%{$keyword}%")->orWhere('label', 'LIKE', "%{$keyword}%");
+        if($keyword = request('search')) {
+            $permissions->where('name' , 'LIKE' , "%{$keyword}%")->orWhere('label' , 'LIKE' , "%{$keyword}%" );
         }
 
-        $roles = $roles->latest();
-        return view('adminLTE::roles.all', compact('roles'));
+        $permissions = $permissions->latest()->get();
+        return view('adminLTE::permissions.all' , compact('permissions'));
     }
 
     /**
@@ -32,82 +32,77 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('adminLTE::roles.create');
+        return view('adminLTE::permissions.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:roles'],
+            'name' => ['required', 'string', 'max:255', 'unique:permissions'],
             'label' => ['required', 'string', 'max:255'],
-            'permissions' => ['required', 'array']
         ]);
 
-        $role = Role::create($data);
-        $role->permissions()->sync($data['permissions']);
-
+        Permission::create($data);
         return back()->with('success', 'مطلب مورد نظر شما با موفقیت ایجاد شد');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $role = Role::whereId($id)->first();
-        return view('adminLTE::roles.edit', compact('role'));
+        $permission = Permission::whereId($id)->first();
+        return view('adminLTE::permissions.edit' , compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $role = Role::whereId($id)->first();
+        $permission = Permission::whereId($id)->first();
+
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255', Rule::unique('roles')->ignore($role->id)],
-            'label' => ['required', 'string', 'max:255'],
-            'permissions' => ['required', 'array']
+            'name' => ['required', 'string', 'max:255' , Rule::unique('permissions')->ignore($permission->id)],
+            'label' => ['required', 'string',  'max:255'],
         ]);
 
-        $role->update($data);
-        $role->permissions()->sync($data['permissions']);
+        $permission->update($data);
         return back()->with('success', 'مطلب مورد نظر شما با موفقیت ویرایش شد');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Role::whereId($id)->first()->delete();
-
+        Permission::whereId($id)->first()->delete();
     }
 }

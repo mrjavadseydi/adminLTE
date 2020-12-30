@@ -2,12 +2,12 @@
 @section('position')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0 text-dark">کاربران</h1>
+            <h1 class="m-0 text-dark">دسترسی ها</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="{{route('adminPanel')}}">خانه</a></li>
-                <li class="breadcrumb-item active">کاربران</li>
+                <li class="breadcrumb-item active">دسترسی ها</li>
             </ol>
         </div><!-- /.col -->
     </div>
@@ -15,63 +15,19 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card collapsed-card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fa fa-filter"></i>
-                        فیلتر
-                    </h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body" style="display: none;">
-                    <form method="get">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label>نام و نام خانوادگی:</label>
-                                    <input type="text" class="form-control" placeholder="نام و نام خانوادگی " name="name">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label>ایمیل:</label>
-                                    <input type="text" class="form-control" placeholder="ایمیل" name="email">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label>تلفن همراه:</label>
-                                    <input type="text" class="form-control" placeholder="تلفن همراه" name="mobile">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="submit" class="btn btn-success" value="فیلتر کن">
-                        </div>
-                    </form>
-                    <div class="row">
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
-
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.card-body -->
-            </div>
-            {{--!filter--}}
-
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">
-                        <i class="fa fa-user"></i>
-                        کاربران
+                        <span class="text-right d-inline">
+                            <i class="fa fa-universal-access"></i>
+                        دسترسی ها
+                            </span>
+                        <span class="text-left d-inline">
+                            <a href="{{route('permissions.create')}}" class="btn btn-sm btn-outline-info" style="float: left">
+                                ساخت دسترسی جدید
+                            </a>
+                        </span>
+
                     </h3>
                 </div>
 
@@ -80,55 +36,47 @@
                         <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>نام کاربر</th>
-                            <th>ایمیل</th>
-                            <th>موبایل</th>
-                            <th>وضعیت موبایل</th>
-                            <th>تاریخ عضویت</th>
-                            <th >عملیات</th>
+                            <th>نام دسترسی</th>
+                            <th>توضیح دسترسی</th>
+                            <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $l =>$val)
+                        @foreach($permissions as $l =>$val)
                             <tr>
                                 <td>{{$l+1}}.</td>
                                 <td>
-                                    @if($val->super_admin)
-                                        <span class="badge badge-primary">
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                    @endif
-                                    {{$val->name}}</td>
-                                <td>
-                                    {{$val->email}}
+                                    {{$val->name}}
                                 </td>
                                 <td>
-                                    {{$val->mobile}}
+                                    {{$val->label}}
                                 </td>
                                 <td>
-                                    @if ($val->phone_verify)
-                                        <span class="badge badge-success"> تایید شده</span>
-                                    @else
-                                        <span class="badge badge-danger">عدم تایید </span>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{$val->created_at}}
-                                </td>
-                                <td>
-                                    @if (!$val->super_admin)
-                                        <a href="{{route('user.edit',$val->id)}}" class="btn btn-sm btn-warning">
-                                            <i  class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="" class="btn btn-sm btn-danger trashbtn" data-id="{{$val->id}}">
-                                            <i class="fa fa-trash" ></i>
-                                        </a>
-                                    @endif
+                                    <a href="{{route('permissions.edit',$val->id)}}" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="" class="btn btn-sm btn-danger trashbtn" data-id="{{$val->id}}">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
 
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
+                        <tfoot class="tfhide" style="border-top:1px dashed black ">
+                        <tr>
+                            <th></th>
+                            <th class="filter">
+                                <input id="title" class="form-control" type="text" placeholder="نام دسترسی">
+                            </th>
+                            <th class="">
+                                <input id="date" class="form-control" type="text" placeholder="توضیح دسترسی">
+                            </th>
+                            <th class="">
+                            </th>
+                        </tr>
+                        </tfoot>
+
                     </table>
 
                 </div>
@@ -142,10 +90,14 @@
 
     <script type="text/javascript" src="{{asset('AdminAsset/plugin/datatables.js')}}"></script>
     <script>
+
         $(document).ready(function () {
+            $('.tfhide').hide();
             var table = $("#table-data2")
                 .DataTable({
+
                     initComplete: function () {
+                        // Apply the search
                         this.api().columns().every(function () {
                             var that = this;
 
@@ -190,26 +142,17 @@
                         }
                     },
                     dom: 'Bfrtip',
-                    buttons: [
+                    buttons: [{
+                        text: '<span> فیلتر </span>',
+                        action: function () {
+                            $('.tfhide').toggle(1000);
+                        }
+                    },
                         {
                             extend: 'excel',
                             text: '<span> خروجی excel</span>',
-                        },
-                        {
-                            extend: 'print',
-                            text: '<span> چاپ</span>',
-                            customize: function (win) {
-                                $(win.document.body)
-                                    .css('direction', 'rtl')
-                                    .prepend(
-                                        ''
-                                    );
-
-                                $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                            }
                         }
+
                     ]
 
                 });
@@ -236,8 +179,8 @@
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "{{url('admin/user')}}/"+id,
-                        data: {id: id, _token: _token,_method:'DELETE'},
+                        url: "{{url('admin/permissions')}}/" + id,
+                        data: {id: id, _token: _token, _method: 'DELETE'},
                         success: function (data) {
                             Swal.fire({
                                 position: 'top-end',
