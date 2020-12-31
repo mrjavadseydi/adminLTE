@@ -5,6 +5,7 @@ namespace admin\LTE\http\controller;
 use admin\LTE\model\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
@@ -21,7 +22,7 @@ class RoleController extends Controller
             $roles->where('name', 'LIKE', "%{$keyword}%")->orWhere('label', 'LIKE', "%{$keyword}%");
         }
 
-        $roles = $roles->latest();
+        $roles = $roles->latest()->get();
         return view('adminLTE::roles.all', compact('roles'));
     }
 

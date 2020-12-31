@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{asset('AdminAsset/')}}/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
     <link rel="stylesheet" href="{{asset('AdminAsset/')}}/dist/css/custom-style.css">
+    <link rel="stylesheet" href="{{asset('AdminAsset/plugins/select2/select2.css')}}">
 
     <!----data table----->
     <link rel="stylesheet" type="text/css" href="{{asset('AdminAsset/plugin/datatables.css')}}"/>
@@ -215,6 +216,13 @@
                                 <p>دسترسی ها</p>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a href="{{route('roles.index')}}"
+                               class="nav-link {{ request()->is('admin/roles') ? 'active':''   }} ">
+                                <i class="fa fa-universal-access nav-icon"></i>
+                                <p>مقام ها</p>
+                            </a>
+                        </li>
                     </ul>
 
                 </nav>
@@ -289,7 +297,7 @@
 <script src="{{asset('AdminAsset/')}}/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('AdminAsset/')}}/dist/js/adminlte.js"></script>
-
+<script src="{{asset('AdminAsset/plugins/select2/select2.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This i/s only for demo purposes) -->
 {{--<script src="{{asset('AdminAsset/')}}/dist/js/pages/dashboard.js"></script>--}}
 <!-- AdminLTE for demo purposes -->
