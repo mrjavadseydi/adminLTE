@@ -120,9 +120,13 @@
                                         <a href="{{route('user.edit',$val->id)}}" class="btn btn-sm btn-warning">
                                             <i  class="fa fa-edit"></i>
                                         </a>
+                                        <a href="{{route('user.permission',$val->id)}}" class="btn btn-sm btn-info" >
+                                            <i class="fa fa-universal-access" ></i>
+                                        </a>
                                         <a href="" class="btn btn-sm btn-danger trashbtn" data-id="{{$val->id}}">
                                             <i class="fa fa-trash" ></i>
                                         </a>
+
                                     @endif
 
                                 </td>

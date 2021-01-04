@@ -121,8 +121,19 @@ class UserController extends Controller
             abort(403);
 
         $user->delete();
-
-
-
+    }
+    public function permissionList ($id) {
+        $user = User::whereId($id)->first();
+        return view('adminLTE::user.permission' , compact('user'));
+    }
+    public function permissionStore (Request $request) {
+        $data = $request->validate([
+            'permissions' => ['required', 'array'],
+            'roles' => ['required', 'array'],
+        ]);
+        $user = User::whereId($request->id)->first();
+        $user->permissions()->sync($data['permissions']);
+        $user->roles()->sync($data['roles']);
+        return back()->with('success',"ویرایش اطلاعات کاربر با موفقیت انجام شد");
     }
 }
