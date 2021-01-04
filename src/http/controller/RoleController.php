@@ -2,7 +2,7 @@
 
 namespace admin\LTE\http\controller;
 
-use admin\LTE\model\Role;
+use admin\LTE\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;

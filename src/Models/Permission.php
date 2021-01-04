@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\LTE\model;
+namespace admin\LTE\Models;
 
 
 use Illuminate\Database\Eloquent\Model;

@@ -1,9 +1,10 @@
 <?php
 
 namespace admin\LTE\http\controller;
-use admin\LTE\model\Permission;
+use admin\LTE\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class PermissionController extends Controller
@@ -16,11 +17,8 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::query();
-
-        if($keyword = request('search')) {
+        if($keyword = request('search'))
             $permissions->where('name' , 'LIKE' , "%{$keyword}%")->orWhere('label' , 'LIKE' , "%{$keyword}%" );
-        }
-
         $permissions = $permissions->latest()->get();
         return view('adminLTE::permissions.all' , compact('permissions'));
     }
@@ -47,7 +45,6 @@ class PermissionController extends Controller
             'name' => ['required', 'string', 'max:255', 'unique:permissions'],
             'label' => ['required', 'string', 'max:255'],
         ]);
-
         Permission::create($data);
         return back()->with('success', 'مطلب مورد نظر شما با موفقیت ایجاد شد');
     }

@@ -1,7 +1,7 @@
 <?php
 namespace admin\LTE\http\trate;
-use admin\LTE\model\Permission;
-use admin\LTE\model\Role;
+use admin\LTE\Models\Permission;
+use admin\LTE\Models\Role;
 
 trait UserTrate
 {
