@@ -1,6 +1,7 @@
 # adminLTE
 AdminPanel and RolePermission system
 
+laravel 8+
 
 install with  composer
 ```
