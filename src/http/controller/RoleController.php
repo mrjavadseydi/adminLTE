@@ -1,8 +1,8 @@
 <?php
 
-namespace admin\LTE\http\controller;
+namespace MrjavadSeydi\AdminLTE\http\controller;
 
-use admin\LTE\Models\Role;
+use MrjavadSeydi\AdminLTE\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;

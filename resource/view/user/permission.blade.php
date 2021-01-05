@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">مقام ها</label>
                             <select class="form-control" name="roles[]" id="roles" multiple>
-                                @foreach(\admin\LTE\Models\Role::all() as $role)
+                                @foreach(\MrjavadSeydi\AdminLTE\Models\Role::all() as $role)
                                     <option
                                         value="{{ $role->id }}" {{ in_array($role->id , $user->roles->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $role->name }}
                                         - {{ $role->label }}</option>
@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">دسترسی ها</label>
                             <select class="form-control" name="permissions[]" id="permissions" multiple>
-                                @foreach(\admin\LTE\Models\Permission::all() as $permission)
+                                @foreach(\MrjavadSeydi\AdminLTE\Models\Permission::all() as $permission)
                                     <option
                                         value="{{ $permission->id }}" {{ in_array($permission->id , $user->permissions->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $permission->name }}
                                         - {{ $permission->label }}</option>

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace admin\LTE;
+namespace MrjavadSeydi\AdminLTE;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,7 +1,7 @@
 <?php
 
-namespace admin\lte\http\controller;
-use admin\LTE\Requests\UserUpdateRequest;
+namespace MrjavadSeydi\AdminLTE\http\controller;
+use MrjavadSeydi\AdminLTE\Requests\UserUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;

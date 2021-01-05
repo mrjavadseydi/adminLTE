@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\LTE\Requests;
+namespace MrjavadSeydi\AdminLTE\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -1,7 +1,7 @@
 <?php
 
-namespace admin\LTE\http\controller;
-use admin\LTE\Models\Permission;
+namespace MrjavadSeydi\AdminLTE\http\controller;
+use MrjavadSeydi\AdminLTE\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;

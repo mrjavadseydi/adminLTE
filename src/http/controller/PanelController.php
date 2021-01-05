@@ -1,7 +1,7 @@
 <?php
 
 
-namespace admin\LTE\http\controller;
+namespace MrjavadSeydi\AdminLTE\http\controller;
 use App\Http\Controllers\Controller;
 
 class PanelController extends Controller

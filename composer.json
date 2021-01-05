@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "admin\\LTE\\": "src/"
+            "MrjavadSeydi\\AdminLTE\\": "src/"
         }
     }
 }
