@@ -81,7 +81,6 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>نام کاربر</th>
-                            <th>ایمیل</th>
                             <th>موبایل</th>
                             <th>وضعیت موبایل</th>
                             <th>تاریخ عضویت</th>
@@ -99,9 +98,6 @@
                                         </span>
                                     @endif
                                     {{$val->firstname." ".$val->lastname}}</td>
-                                <td>
-                                    {{$val->email}}
-                                </td>
                                 <td>
                                     {{$val->mobile}}
                                 </td>

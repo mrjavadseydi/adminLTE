@@ -96,7 +96,7 @@ class UserController extends Controller
         }
         $user->update([
             'firstname'=>$request->firstname,
-            'lastname'=>$request->name,
+            'lastname'=>$request->lastname,
             'mobile'=>$request->mobile,
             'phone_verify'=>$request->phone_verify,
         ]);
