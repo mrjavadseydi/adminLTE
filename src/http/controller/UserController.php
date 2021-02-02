@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function filterUser(Request $request ,$users){
         if ($request->has('name')&&!empty($request->name)) {
-            $users = $users->where('name' ,'like' ,"%".$request->name."%");
+            $users = $users->where('firstname' ,'like' ,"%".$request->name."%")->orWhere('lastname' ,'like' ,"%".$request->name."%");
         }
         if ($request->has('mobile')&&!empty($request->mobile)) {
             $users = $users->where('mobile' ,'like' ,"%".$request->mobile."%");
