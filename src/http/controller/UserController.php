@@ -22,9 +22,6 @@ class UserController extends Controller
     }
 
     public function filterUser(Request $request ,$users){
-        if ($request->has('email')&&!empty($request->email)) {
-            $users = $users->where('email' ,'like' ,"%".$request->email."%");
-        }
         if ($request->has('name')&&!empty($request->name)) {
             $users = $users->where('name' ,'like' ,"%".$request->name."%");
         }
@@ -98,8 +95,8 @@ class UserController extends Controller
             ]);
         }
         $user->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
+            'firstname'=>$request->firstname,
+            'lastname'=>$request->name,
             'mobile'=>$request->mobile,
             'phone_verify'=>$request->phone_verify,
         ]);
