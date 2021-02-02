@@ -11,5 +11,9 @@
         "psr-4": {
             "MrjavadSeydi\\AdminLTE\\": "src/"
         }
-    }
+    },"autoload-dev": {
+    "files": [
+        "src/helper/helper.php"
+    ]
+}
 }

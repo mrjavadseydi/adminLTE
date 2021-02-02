@@ -20,7 +20,7 @@ class PermissionController extends Controller
         if($keyword = request('search'))
             $permissions->where('name' , 'LIKE' , "%{$keyword}%")->orWhere('label' , 'LIKE' , "%{$keyword}%" );
         $permissions = $permissions->latest()->get();
-        return view('adminLTE::permissions.all' , compact('permissions'));
+        return sview('adminLTE::permissions.all' , compact('permissions'));
     }
 
     /**
@@ -30,7 +30,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('adminLTE::permissions.create');
+        return sview('adminLTE::permissions.create');
     }
 
     /**
@@ -69,7 +69,7 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $permission = Permission::whereId($id)->first();
-        return view('adminLTE::permissions.edit' , compact('permission'));
+        return sview('adminLTE::permissions.edit' , compact('permission'));
     }
 
     /**

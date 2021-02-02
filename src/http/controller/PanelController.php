@@ -8,6 +8,6 @@ class PanelController extends Controller
 {
     public function index()
     {
-        return view('adminLTE::index');
+        return sview('adminLTE::index');
     }
 }

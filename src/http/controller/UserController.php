@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $users = new User();
         $users = $this->filterUser($request,$users)->get();
-        return view("adminLTE::user.index",compact('users'));
+        return sview("adminLTE::user.index",compact('users'));
     }
 
     public function filterUser(Request $request ,$users){
@@ -72,7 +72,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('adminLTE::user.edit',compact('user'));
+        return sview('adminLTE::user.edit',compact('user'));
     }
 
     /**
@@ -121,7 +121,7 @@ class UserController extends Controller
     }
     public function permissionList ($id) {
         $user = User::whereId($id)->first();
-        return view('adminLTE::user.permission' , compact('user'));
+        return sview('adminLTE::user.permission' , compact('user'));
     }
     public function permissionStore (Request $request) {
         $data = $request->validate([

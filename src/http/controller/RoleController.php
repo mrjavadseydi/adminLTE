@@ -23,7 +23,7 @@ class RoleController extends Controller
         }
 
         $roles = $roles->latest()->get();
-        return view('adminLTE::roles.all', compact('roles'));
+        return sview('adminLTE::roles.all', compact('roles'));
     }
 
     /**
@@ -33,7 +33,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('adminLTE::roles.create');
+        return sview('adminLTE::roles.create');
     }
 
     /**
@@ -76,7 +76,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::whereId($id)->first();
-        return view('adminLTE::roles.edit', compact('role'));
+        return sview('adminLTE::roles.edit', compact('role'));
     }
 
     /**
